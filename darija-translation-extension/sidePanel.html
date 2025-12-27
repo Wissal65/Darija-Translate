@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Darija Translate</title>
+  <link rel="stylesheet" href="sidepanel.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <div id="landingScreen" class="screen">
+      <div class="auth-status-bar">
+        <div id="authStatusContent"></div>
+      </div>
+
+      <div class="hero-section">
+        <div class="logo">
+          <span class="logo-black">Darija </span>
+          <span class="logo-orange">Translate</span>
+        </div>
+        <p class="subtitle">Context-aware translation powered by AI</p>
+      </div>
+
+      <div class="language-container">
+        <div class="lang-button">
+          <span class="lang-text" id="landingSourceLang">English</span>
+        </div>
+        
+        <div class="swap-button-container">
+          <button class="swap-button" id="landingSwapBtn">
+            <i class="material-icons">swap_vert</i>
+          </button>
+        </div>
+        
+        <div class="lang-button">
+          <span class="lang-text lang-text-blue" id="landingTargetLang">Darija</span>
+        </div>
+      </div>
+
+      <div class="features-section">
+        <div class="feature-item">
+          <div class="feature-icon-box">
+            <i class="material-icons" style="color: #8B5CF6;">auto_awesome</i>
+          </div>
+          <p class="feature-item-text">AI-powered context detection</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon-box">
+            <i class="material-icons" style="color: #FF6B35;">mic</i>
+          </div>
+          <p class="feature-item-text">Voice translation support</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon-box">
+            <i class="material-icons" style="color: #3B82F6;">chat_bubble</i>
+          </div>
+          <p class="feature-item-text">Multiple conversation contexts</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon-box">
+            <i class="material-icons" style="color: #10B981;">volume_up</i>
+          </div>
+          <p class="feature-item-text">Text-to-speech in both languages</p>
+        </div>
+      </div>
+
+      <div class="start-button-container">
+        <button class="start-button" id="startTranslatingBtn">
+          <i class="material-icons">rocket_launch</i>
+          <span>Start Translating</span>
+        </button>
+      </div>
+
+      <p class="footer-note" id="footerNote">
+        Sign in to save your translation history and preferences
+      </p>
+    </div>
+
+    <div id="authScreen" class="screen hidden">
+      <div class="auth-card">
+        <button class="back-button-icon" id="authBackBtn">
+          <i class="material-icons">arrow_back</i>
+        </button>
+        
+        <div class="auth-logo">
+          <span style="color: #2C2C2E">Darija </span>
+          <span style="color: #FF6B35">Translate</span>
+        </div>
+        <p class="auth-subtitle" id="authSubtitle">Sign in to continue</p>
+
+        <div class="input-group">
+          <label class="input-label">Username</label>
+          <div class="input-container">
+            <i class="material-icons input-icon">person</i>
+            <input type="text" class="input-field" id="authUsername" placeholder="Enter username" autocomplete="username">
+          </div>
+          <span class="error-text" id="usernameError"></span>
+        </div>
+
+        <div class="input-group" id="emailGroup" style="display: none;">
+          <label class="input-label">Email</label>
+          <div class="input-container">
+            <i class="material-icons input-icon">email</i>
+            <input type="email" class="input-field" id="authEmail" placeholder="Enter email" autocomplete="email">
+          </div>
+          <span class="error-text" id="emailError"></span>
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Password</label>
+          <div class="input-container">
+            <i class="material-icons input-icon">lock</i>
+            <input type="password" class="input-field" id="authPassword" placeholder="Enter password" autocomplete="current-password">
+            <button class="eye-button" id="togglePasswordBtn">
+              <i class="material-icons" id="eyeIcon">visibility</i>
+            </button>
+          </div>
+          <span class="error-text" id="passwordError"></span>
+        </div>
+
+        <button class="submit-button" id="submitAuthBtn">
+          <span id="submitAuthText">Sign In</span>
+        </button>
+
+        <div class="switch-container">
+          <span class="switch-text" id="switchText">Don't have an account?</span>
+          <button class="switch-link" id="switchModeBtn">Sign Up</button>
+        </div>
+
+        <div class="divider">
+          <div class="divider-line"></div>
+          <span class="divider-text">OR</span>
+          <div class="divider-line"></div>
+        </div>
+
+        <button class="continue-button" id="continueWithoutBtn">
+          Continue without account
+        </button>
+      </div>
+    </div>
+
+    <div id="translationScreen" class="screen hidden">
+      <div class="header-row">
+        <div class="logo-small">
+          <span class="logo-black">Darija </span>
+          <span class="logo-orange">Translate</span>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <div class="user-badge-small" id="userBadgeSmall"></div>
+          <button class="home-button" id="homeButton">
+            <i class="material-icons">home</i>
+          </button>
+        </div>
+      </div>
+
+      <button class="context-selector" id="contextSelectorBtn">
+        <div class="context-icon-container">
+          <i class="material-icons">chat_bubble_outline</i>
+        </div>
+        <div class="context-info">
+          <div class="context-value" id="contextValue">Auto-detect</div>
+          <div class="context-subtext" id="contextSubtext"></div>
+        </div>
+        <i class="material-icons" style="color: #9CA3AF;">expand_more</i>
+      </button>
+
+      <div class="signals-container hidden" id="signalsContainer"></div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-label" id="inputCardLabel">ENGLISH</span>
+          <div class="card-actions">
+            <button class="icon-button" id="micButton">
+              <i class="material-icons">mic</i>
+            </button>
+            <button class="icon-button" id="speakInputBtn">
+              <i class="material-icons">volume_up</i>
+            </button>
+          </div>
+        </div>
+        <textarea class="input" id="inputText" placeholder="Type or record..." maxlength="5000"></textarea>
+        <div class="counter"><span id="inputCounter">0</span> / 5000</div>
+      </div>
+
+      <div class="swap-arrow-container">
+        <button class="swap-arrow-button" id="swapArrowBtn">
+          <i class="material-icons">swap_vert</i>
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <span class="card-label" id="outputCardLabel">DARIJA</span>
+          <button class="icon-button" id="speakOutputBtn">
+            <i class="material-icons">volume_up</i>
+          </button>
+        </div>
+        <div class="output" id="outputText">Translation will appear here...</div>
+        <div class="loading-box hidden" id="loadingBox">
+          <div class="spinner"></div>
+          <span class="loading-text">Translating...</span>
+        </div>
+      </div>
+
+      <div class="action-buttons-container">
+        <button class="action-button clear-button" id="clearButton">
+          <i class="material-icons">refresh</i>
+          <span class="button-label">Clear</span>
+        </button>
+        <button class="action-button translate-button" id="translateButton">
+          <i class="material-icons">auto_awesome</i>
+          <span class="button-label-white">Translate</span>
+        </button>
+        <button class="action-button home-action-button" id="homeActionButton">
+          <i class="material-icons">home</i>
+          <span class="button-label">Home</span>
+        </button>
+      </div>
+
+      <div class="modal-overlay hidden" id="contextModal">
+        <div class="modal-content">
+          <div class="modal-handle"></div>
+          <h3 class="modal-title">Select Context</h3>
+          
+          <button class="context-option context-option-active" data-context="">
+            <div class="context-option-icon">
+              <i class="material-icons">public</i>
+            </div>
+            <div class="context-text-box">
+              <div class="context-name">Auto-detect</div>
+              <div class="context-desc">AI detects context automatically</div>
+            </div>
+          </button>
+
+          <div class="context-list">
+            <button class="context-option" data-context="casual">
+              <div class="context-option-icon">💬</div>
+              <div class="context-text-box">
+                <div class="context-name">Casual</div>
+                <div class="context-desc">Informal conversations with friends</div>
+              </div>
+            </button>
+            <button class="context-option" data-context="formal">
+              <div class="context-option-icon">👔</div>
+              <div class="context-text-box">
+                <div class="context-name">Formal</div>
+                <div class="context-desc">Official and professional settings</div>
+              </div>
+            </button>
+            <button class="context-option" data-context="medical">
+              <div class="context-option-icon">🏥</div>
+              <div class="context-text-box">
+                <div class="context-name">Medical</div>
+                <div class="context-desc">Health-related discussions</div>
+              </div>
+            </button>
+            <button class="context-option" data-context="business">
+              <div class="context-option-icon">💼</div>
+              <div class="context-text-box">
+                <div class="context-name">Business</div>
+                <div class="context-desc">Business negotiations</div>
+              </div>
+            </button>
+            <button class="context-option" data-context="shopping">
+              <div class="context-option-icon">🛍️</div>
+              <div class="context-text-box">
+                <div class="context-name">Shopping</div>
+                <div class="context-desc">Retail and marketplace</div>
+              </div>
+            </button>
+            <button class="context-option" data-context="restaurant">
+              <div class="context-option-icon">🍽️</div>
+              <div class="context-text-box">
+                <div class="context-name">Restaurant</div>
+                <div class="context-desc">Food ordering and dining</div>
+              </div>
+            </button>
+            <button class="context-option" data-context="travel">
+              <div class="context-option-icon">✈️</div>
+              <div class="context-text-box">
+                <div class="context-name">Travel</div>
+                <div class="context-desc">Transportation and tourism</div>
+              </div>
+            </button>
+            <button class="context-option" data-context="emergency">
+              <div class="context-option-icon">🚨</div>
+              <div class="context-text-box">
+                <div class="context-name">Emergency</div>
+                <div class="context-desc">Urgent situations</div>
+              </div>
+            </button>
+            <button class="context-option" data-context="social">
+              <div class="context-option-icon">🎉</div>
+              <div class="context-text-box">
+                <div class="context-name">Social</div>
+                <div class="context-desc">Social events and celebrations</div>
+              </div>
+            </button>
+          </div>
+
+          <button class="modal-close-button" id="modalCloseBtn">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>
