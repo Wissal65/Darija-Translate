@@ -6,7 +6,7 @@ Context-aware bidirectional translation between English and Moroccan Darija (Ara
 
 ## 🎥 Demo Video
 
-📹 [Watch Full Demo Video (11 minutes)](./demo/demo.mp4)
+ [Watch Full Demo Video](./demo/demo.mp4)
 
 ## 📸 Screenshots
 
@@ -336,7 +336,7 @@ NODE_ENV=development
 
 ## 🔗 Links
 
-- [Video Presentation](https://youtu.be/YOUR_VIDEO_LINK)
+- [Watch Full Demo Video](./demo/demo.mp4)
 - [Architecture Diagram](./screenshots/architecture-diagram.png)
 
 ---
